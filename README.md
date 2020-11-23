@@ -1,2 +1,2 @@
 # Soundboard
-Simple HTML / JS Soundboard
+Simple Web Soundboard
