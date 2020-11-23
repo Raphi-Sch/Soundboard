@@ -20,7 +20,7 @@ while($row = mysqli_fetch_assoc($data)) {
                         <div id='progress-bar-$ref' class='progress-bar progress-bar-success' role='progressbar' style='width:0%'></div>
                     </div>
                     <button id='btn-play-$ref' class='btn btn-success' onclick='play_pause($ref)'><i id='ico-play-$ref' class='glyphicon glyphicon-play'></i></button>
-                    <button id='btn-load-$ref' class='btn btn-danger pull-right' onclick='load($ref)'><i id='ico-load-$ref' class='glyphicon glyphicon-stop'></i></button>
+                    <button class='btn btn-danger pull-right' onclick='stop($ref)'><i class='glyphicon glyphicon-stop'></i></button>
                 </div>
             </div>
 

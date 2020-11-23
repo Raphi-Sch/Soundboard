@@ -23,9 +23,10 @@ function play_pause(id){
   }
 }
 
-function load(id){
+function stop(id){
   play[id] = false;
-  document.getElementById('player-' + id).load();
+  document.getElementById('player-' + id).pause();
+  document.getElementById('player-' + id).currentTime = 0;
   clearInterval(intervals[id]);
   document.getElementById('btn-play-' + id).className = "btn btn-success";
   document.getElementById('ico-play-' + id).className = "glyphicon glyphicon-play";
