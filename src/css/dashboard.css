@@ -1,0 +1,56 @@
+body {
+  padding-top: 50px;
+  color: #EFEFF1;
+  background-color: #0E0E10;
+}
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.navbar-fixed-top {
+  border: 0;
+}
+
+.main {
+  padding: 20px;
+}
+
+.main .page-header {
+  margin-top: 0;
+}
+
+.form-control, .btn {
+  min-height: 38px;
+  border-radius: 2px;
+}
+
+.btn {        
+  font-size: 15px;
+  font-weight: bold;
+  width: 33%;
+}
+
+.wrapper {
+  display: grid;
+  margin-left: auto;
+  margin-right: auto;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+}
+
+.card {
+  background: #2f3542;
+  width: 300px;
+  padding: 10px !important;
+}
+
+.play{
+  background-color: #27ae60;
+}
+
+.sample-title{
+  padding-bottom: 8px;
+  font-size: medium;
+}
