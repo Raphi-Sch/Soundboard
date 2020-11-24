@@ -40,14 +40,21 @@ function play_progress(id){
   if(current == duration) stop(id);
 }
 
-function speed(id){
+function change_speed(id){
   current = document.getElementById('speed-range-' + id).value;
   document.getElementById('speed-text-' + id).innerText = current;
   document.getElementById('player-' + id).playbackRate = current;
 }
 
-function volume(id){
+function change_volume(id){
   current = document.getElementById('volume-range-' + id).value;
   document.getElementById('volume-text-' + id).innerText = parseInt(current * 100) + "%";
   document.getElementById('player-' + id).volume = current;
+}
+
+function save_parameters(id){
+  volume = document.getElementById('volume-range-' + id).value;
+  speed = document.getElementById('speed-range-' + id).value;
+  
+  $.post("index.php", { action : "save_parameters", reference: id, volume: volume, speed: speed }); 
 }

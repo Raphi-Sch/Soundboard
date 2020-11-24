@@ -1,8 +1,19 @@
 <?php
 require_once('src/php/db.php');
 $db = db_connect();
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if($_POST['action'] == "save_parameters" && !empty($_POST['reference'])){
+        $reference = addslashes(trim($_POST['reference']));
+        $volume = addslashes(trim($_POST['volume']));
+        $speed = addslashes(trim($_POST['speed']));
 
-$data = db_query_raw($db, "SELECT * FROM active, audio WHERE active.audio = audio.reference ORDER BY active.reference ");
+        db_query_no_result($db, "UPDATE `active` SET `volume` = '$volume', `speed` = '$speed' WHERE reference = '$reference'");
+    }
+    exit();
+}
+
+
+$data = db_query_raw($db, "SELECT active.*, audio.file, audio.name FROM active, audio WHERE active.audio = audio.reference ORDER BY active.reference ");
 $HTML_players = "";
 while($row = mysqli_fetch_assoc($data)) {
     $ref = $row['reference'];
@@ -30,7 +41,7 @@ while($row = mysqli_fetch_assoc($data)) {
                     <i class='glyphicon glyphicon-volume-up'></i>
                 </div>
                 <div class='col-md-8'>
-                    <input id='volume-range-$ref' type='range' min=0 max=1 step=0.05 value=$volume oninput='volume($ref)'>
+                    <input id='volume-range-$ref' type='range' min=0 max=1 step=0.01 value=$volume oninput='change_volume($ref)' onchange='save_parameters($ref)'>
                 </div>
                 <div class='col-md-2'>
                     <p id='volume-text-$ref'>".($volume * 100)."%</p>
@@ -43,7 +54,7 @@ while($row = mysqli_fetch_assoc($data)) {
                     <i class='glyphicon glyphicon-dashboard'></i>
                 </div>
                 <div class='col-md-8'>
-                    <input id='speed-range-$ref' type='range' min=0.25 max=4 step=0.25 value='$speed' oninput='speed($ref)'>
+                    <input id='speed-range-$ref' type='range' min=0.25 max=4 step=0.25 value='$speed' oninput='change_speed($ref)' onchange='save_parameters($ref)'>
                 </div>
                 <div class='col-md-2'>
                     <p id='speed-text-$ref'>$speed</p>
