@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.9.5deb2~bpo10+1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost
--- Généré le :  lun. 23 nov. 2020 à 23:33
--- Version du serveur :  10.3.22-MariaDB-0+deb10u1
--- Version de PHP :  7.3.19-1~deb10u1
+-- Hôte : localhost:3306
+-- Généré le : mar. 24 nov. 2020 à 09:26
+-- Version du serveur :  10.3.25-MariaDB-0+deb10u1
+-- Version de PHP : 7.3.19-1~deb10u1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `soundboard`
+-- Base de données : `soundboard`
 --
 
 -- --------------------------------------------------------
@@ -29,10 +29,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `active` (
-  `reference` smallint(6) NOT NULL,
   `volume` float NOT NULL DEFAULT 1,
   `speed` float NOT NULL DEFAULT 1,
-  `audio` int(11) DEFAULT NULL
+  `audio` int(11) DEFAULT NULL,
+  `reference` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -55,7 +55,7 @@ CREATE TABLE `audio` (
 -- Index pour la table `active`
 --
 ALTER TABLE `active`
-  ADD PRIMARY KEY (`reference`),
+  ADD PRIMARY KEY (`reference`);
 
 --
 -- Index pour la table `audio`
@@ -66,6 +66,12 @@ ALTER TABLE `audio`
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
+
+--
+-- AUTO_INCREMENT pour la table `active`
+--
+ALTER TABLE `active`
+  MODIFY `reference` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `audio`
