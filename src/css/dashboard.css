@@ -11,6 +11,8 @@ body {
 
 .navbar-fixed-top {
   border: 0;
+  background-color: #18181B;
+  border-bottom: 2px solid #000;
 }
 
 .main {
@@ -29,6 +31,9 @@ body {
 .btn {        
   font-size: 15px;
   font-weight: bold;
+}
+
+.btn-player{
   width: 33%;
 }
 
@@ -53,4 +58,30 @@ body {
 .sample-title{
   padding-bottom: 8px;
   font-size: medium;
+}
+
+a:hover{
+  color: #fff !important;
+  background-color: #2f3542 !important;
+}
+
+.table-hover tr:hover{
+  color: #fff !important;
+  background-color: #2f3542 !important;
+}
+
+.form-control{
+  color: #fff !important;
+  background-color: #18181B !important;
+}
+
+/* SWAL Dark theme */
+
+.swal2-popup{
+  color: #fff !important;
+  background: #2f3542 !important;
+}
+
+.swal2-popup .swal2-title{
+  color: #fff !important;
 }
