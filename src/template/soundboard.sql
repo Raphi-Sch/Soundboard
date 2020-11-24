@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mar. 24 nov. 2020 à 09:26
+-- Généré le : mar. 24 nov. 2020 à 09:31
 -- Version du serveur :  10.3.25-MariaDB-0+deb10u1
 -- Version de PHP : 7.3.19-1~deb10u1
 
@@ -29,10 +29,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `active` (
+  `reference` smallint(6) NOT NULL,
   `volume` float NOT NULL DEFAULT 1,
   `speed` float NOT NULL DEFAULT 1,
-  `audio` int(11) DEFAULT NULL,
-  `reference` int(11) NOT NULL
+  `audio` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -71,7 +71,7 @@ ALTER TABLE `audio`
 -- AUTO_INCREMENT pour la table `active`
 --
 ALTER TABLE `active`
-  MODIFY `reference` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `reference` smallint(6) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `audio`
