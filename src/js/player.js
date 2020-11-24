@@ -37,7 +37,7 @@ function play_progress(id){
   current = document.getElementById('player-' + id).currentTime;
   duration = document.getElementById('player-' + id).duration;
   document.getElementById('progress-bar-' + id).style.width = (current / duration) * 100 + "%";
-  if(current == duration) load(id);
+  if(current == duration) stop(id);
 }
 
 function speed(id){
