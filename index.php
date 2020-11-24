@@ -82,7 +82,7 @@ while($row = mysqli_fetch_assoc($data)) {
     <?php include('src/php/navbar.php');?>
 
     <!-- Main area -->
-    <div class="main col-md-10 col-md-offset-1">
+    <div class="main col-md-12">
         <div class='wrapper'>
             <?php echo $HTML_players ?>
         </div>
