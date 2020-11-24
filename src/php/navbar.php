@@ -10,6 +10,10 @@
     <span class="navbar-brand" href="#" id="bot_name_nav">Soundboard</span>
     </div>
     <div id='navbar' class='collapse navbar-collapse'>
+        <ul class="nav navbar-nav">
+            <li id="index"><a href="index.php"><i class="glyphicon glyphicon-play"></i> Player</a></li>
+            <li id="library"><a href="library.php"><i class="glyphicon glyphicon-align-justify"></i> Library</a></li>
+        </ul>
         <ul class='nav navbar-nav navbar-right'>
 
         </ul>
