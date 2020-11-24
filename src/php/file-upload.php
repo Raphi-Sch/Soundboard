@@ -22,7 +22,7 @@ function file_upload($file_field, $dest_dir, $name_prefix = "", $original_name =
                 throw new RuntimeException('Unknown error');
         }
 
-        // You should also check filesize here. 10MB = 10485760 Bytes
+        // You should also check filesize here. 1MB = 1048576 Bytes
         if ($_FILES[$file_field]['size'] > $MAX_FILE_SIZE) {
             $size = $_FILES[$file_field]['size'] / $MAX_FILE_SIZE;
             throw new RuntimeException("File size is larger than the server allows. (Limit : ".number_format($MAX_FILE_SIZE/1048576, 2)." MB, Your file : ".number_format($_FILES[$file_field]['size'] / 1048576, 2)." MB).");
@@ -60,7 +60,7 @@ function file_upload($file_field, $dest_dir, $name_prefix = "", $original_name =
         }
     }
     catch (RuntimeException $e) {
-        syslog(LOG_ERR ,$e->getMessage());
+        $_SESSION['alert'] = ["error", "Error when receiving the file", $e->getMessage()];
         return false; // Error append
     }
     return $name.".".$ext; // Everything OK
