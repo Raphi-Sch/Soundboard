@@ -2,7 +2,7 @@
 require_once('src/php/db.php');
 $db = db_connect();
 
-$data = db_query_raw($db, "SELECT * FROM active, audio WHERE active.audio = audio.reference ORDER BY active.reference");
+$data = db_query_raw($db, "SELECT * FROM active, audio WHERE active.audio = audio.reference ORDER BY active.reference ");
 $HTML_players = "";
 while($row = mysqli_fetch_assoc($data)) {
     $ref = $row['reference'];
@@ -19,8 +19,8 @@ while($row = mysqli_fetch_assoc($data)) {
                     <div class='progress'>
                         <div id='progress-bar-$ref' class='progress-bar progress-bar-success' role='progressbar' style='width:0%'></div>
                     </div>
-                    <button id='btn-play-$ref' class='btn btn-success' onclick='play_pause($ref)'><i id='ico-play-$ref' class='glyphicon glyphicon-play'></i></button>
-                    <button class='btn btn-danger pull-right' onclick='stop($ref)'><i class='glyphicon glyphicon-stop'></i></button>
+                    <button id='btn-play-$ref' class='btn btn-success btn-player' onclick='play_pause($ref)'><i id='ico-play-$ref' class='glyphicon glyphicon-play'></i></button>
+                    <button class='btn btn-danger btn-player pull-right' onclick='stop($ref)'><i class='glyphicon glyphicon-stop'></i></button>
                 </div>
             </div>
 
@@ -62,11 +62,8 @@ while($row = mysqli_fetch_assoc($data)) {
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <link href="src/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
-    <link href="src/css/dashboard.css" rel="stylesheet">
-    <title>Soundboard</title>
+    <?php include('src/html/header.html');?>
+    <title>Soundboard - Player</title>
   </head>
 
   <body>
@@ -81,6 +78,12 @@ while($row = mysqli_fetch_assoc($data)) {
     </div>
 
     <!-- Footer -->
+    <?php include('src/html/footer.html');?>
     <script src='src/js/player.js'></script>
+    <script>
+        $(document).ready(function() {
+            document.getElementById("index").className="active"; 
+        });
+    </script>
 </body>
 </html>
