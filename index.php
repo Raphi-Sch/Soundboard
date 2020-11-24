@@ -70,6 +70,9 @@ while($row = mysqli_fetch_assoc($data)) {
   </head>
 
   <body>
+    <!-- Navbar -->
+    <?php include('src/php/navbar.php');?>
+
     <!-- Main area -->
     <div class="main col-md-10 col-md-offset-1">
         <div class='wrapper'>
