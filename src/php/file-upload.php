@@ -60,7 +60,7 @@ function file_upload($file_field, $dest_dir, $name_prefix = "", $original_name =
         }
     }
     catch (RuntimeException $e) {
-        $_SESSION['alert'] = ["error", "Error when receiving the file", $e->getMessage()];
+        syslog(LOG_ERR ,$e->getMessage());
         return false; // Error append
     }
     return $name.".".$ext; // Everything OK
