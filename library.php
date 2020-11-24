@@ -32,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
 $HTML = "";
-$result = db_query_raw($db, "SELECT * FROM audio");
+$result = db_query_raw($db, "SELECT * FROM audio ORDER BY audio.reference");
 while($row = mysqli_fetch_assoc($result)) {
     $HTML .= "
     <tr>
@@ -64,7 +64,7 @@ while($row = mysqli_fetch_assoc($result)) {
             <thead>
                 <tr>
                     <th class="col-xs-1">Reference</th>
-                    <th class="col-xs-4">Name</th>
+                    <th class="col-xs-3">Name</th>
                     <th>File</th>
                     <th class="col-xs-2"></th>
                 </tr>
