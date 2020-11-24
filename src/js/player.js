@@ -7,7 +7,7 @@ function play_pause(id){
     play[id] = false;
     document.getElementById('player-' + id).pause();
     clearInterval(intervals[id]);
-    document.getElementById('btn-play-' + id).className = "btn btn-success";
+    document.getElementById('btn-play-' + id).className = "btn btn-success btn-player";
     document.getElementById('ico-play-' + id).className = "glyphicon glyphicon-play";
     
   }
@@ -15,7 +15,7 @@ function play_pause(id){
     // Playing
     play[id] = true;
     document.getElementById('player-' + id).play();
-    document.getElementById('btn-play-' + id).className = "btn btn-warning";
+    document.getElementById('btn-play-' + id).className = "btn btn-warning btn-player";
     document.getElementById('ico-play-' + id).className = "glyphicon glyphicon-pause";
     intervals[id] = setInterval(() => {
       play_progress(id)
@@ -28,7 +28,7 @@ function stop(id){
   document.getElementById('player-' + id).pause();
   document.getElementById('player-' + id).currentTime = 0;
   clearInterval(intervals[id]);
-  document.getElementById('btn-play-' + id).className = "btn btn-success";
+  document.getElementById('btn-play-' + id).className = "btn btn-success btn-player";
   document.getElementById('ico-play-' + id).className = "glyphicon glyphicon-play";
   document.getElementById('progress-bar-' + id).style.width = "0%";
 }
