@@ -6,7 +6,7 @@ function file_upload($file_field, $dest_dir, $name_prefix = "", $original_name =
     try {
         // If this request falls under any of them, treat it invalid.
         if (!isset($_FILES[$file_field]['error']) || is_array($_FILES[$file_field]['error'])) {
-            throw new RuntimeException('Invalid parameters');
+            throw new RuntimeException('Invalid input field.');
         }
 
         // Check $_FILES[$file_field]['error'] value.
