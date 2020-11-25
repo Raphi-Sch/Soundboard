@@ -8,7 +8,7 @@ $db = db_connect();
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if($_POST['action'] == "add" && !empty($_POST['name'])){
         $name = addslashes(trim($_POST['name']));
-        $file_name = file_upload("audio", dirname(__FILE__)."/src/audio");
+        $file_name = file_upload("audio", dirname(__FILE__)."/src/audio", "", false, md5(time()));
         if($file_name)
             db_query_no_result($db, "INSERT INTO audio VALUES (NULL, '$name', '$file_name')");
     }
