@@ -32,11 +32,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
 $HTML = "";
-$result = db_query_raw($db, "SELECT * FROM audio ORDER BY audio.reference");
+$result = db_query_raw($db, "SELECT * FROM audio ORDER BY audio.name");
 while($row = mysqli_fetch_assoc($result)) {
     $HTML .= "
     <tr>
-        <td>".$row["reference"]."</td>
         <td id='name_".$row["reference"]."'>".$row["name"]."</td>
         <td id='file_".$row["reference"]."'><a href='src/audio/".$row["file"]."'>".$row["file"]."</a></td>
         <td>
@@ -63,7 +62,6 @@ while($row = mysqli_fetch_assoc($result)) {
         <table class="table table-hover table-condensed">
             <thead>
                 <tr>
-                    <th class="col-xs-1">Reference</th>
                     <th class="col-xs-3">Name</th>
                     <th>File</th>
                     <th class="col-xs-2"></th>
@@ -71,7 +69,6 @@ while($row = mysqli_fetch_assoc($result)) {
                 <tr>
                     <form method="post" enctype='multipart/form-data'>
                         <input type='hidden' name='action' value='add'>
-                        <td></td>
                         <td><input type="text" class="form-control" name="name" required></td>
                         <td><input type="file" class="form-control" name="audio" accept=".mp3" required></td>
                         <td><button type="submit" class="btn btn-success" name="action" value="add"><i class="glyphicon glyphicon-plus"></i></button></td>
