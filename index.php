@@ -56,10 +56,10 @@ while($row = mysqli_fetch_assoc($data)) {
                     <i class='glyphicon glyphicon-dashboard'></i>
                 </div>
                 <div class='col-md-8'>
-                    <input id='speed-range-$ref' type='range' min=0.25 max=4 step=0.25 value='$speed' oninput='change_speed($ref)' onchange='save_parameters($ref)'>
+                    <input id='speed-range-$ref' type='range' min=0.25 max=2 step=0.25 value='$speed' oninput='change_speed($ref)' onchange='save_parameters($ref)'>
                 </div>
                 <div class='col-md-2'>
-                    <p id='speed-text-$ref'>$speed</p>
+                    <p id='speed-text-$ref'>x$speed</p>
                 </div>
             </div>
 

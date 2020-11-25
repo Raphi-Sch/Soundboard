@@ -42,7 +42,7 @@ function play_progress(id){
 
 function change_speed(id){
   current = document.getElementById('speed-range-' + id).value;
-  document.getElementById('speed-text-' + id).innerText = current;
+  document.getElementById('speed-text-' + id).innerText = "x" + current;
   document.getElementById('player-' + id).playbackRate = current;
 }
 
