@@ -58,3 +58,10 @@ function save_parameters(id){
   
   $.post("index.php", { action : "save_parameters", reference: id, volume: volume, speed: speed }); 
 }
+
+function load_parameters(config){
+  for (const [id, value] of Object.entries(config)) {
+    document.getElementById('player-' + id).volume = value[0];
+    document.getElementById('player-' + id).playbackRate = value[1];
+  };
+}

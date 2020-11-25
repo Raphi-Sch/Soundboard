@@ -15,12 +15,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 $data = db_query_raw($db, "SELECT active.*, audio.file, audio.name FROM active, audio WHERE active.audio = audio.reference ORDER BY active.reference ");
 $HTML_players = "";
+$params = [];
 while($row = mysqli_fetch_assoc($data)) {
     $ref = $row['reference'];
     $name = $row['name'];
     $file = $row['file'];
     $volume = $row['volume'];
     $speed = $row['speed'];
+    $params[$ref] = [$volume, $speed];
 
     $HTML_players .= "
         <div class='card'>
@@ -68,6 +70,8 @@ while($row = mysqli_fetch_assoc($data)) {
     ";
 }
 
+$JSON_params = json_encode($params);
+
 ?>
 
 <!DOCTYPE html>
@@ -92,8 +96,10 @@ while($row = mysqli_fetch_assoc($data)) {
     <?php include('src/html/footer.html');?>
     <script src='src/js/player.js'></script>
     <script>
+        var params = JSON.parse('<?php echo $JSON_params; ?>');
         $(document).ready(function() {
             document.getElementById("index").className="active"; 
+            load_parameters(params);
         });
     </script>
 </body>
