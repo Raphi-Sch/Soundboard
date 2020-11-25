@@ -63,7 +63,7 @@ while($row = mysqli_fetch_assoc($result)) {
         <table class="table table-hover table-condensed">
             <thead>
                 <tr>
-                    <th class="col-xs-1">Reference</th>
+                    <th class="col-xs-1">Player</th>
                     <th>Audio</th>
                     <th class="col-xs-2"></th>
                 </tr>
