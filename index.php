@@ -32,8 +32,9 @@ while($row = mysqli_fetch_assoc($data)) {
                     <div class='progress'>
                         <div id='progress-bar-$ref' class='progress-bar progress-bar-success' role='progressbar' style='width:0%'></div>
                     </div>
-                    <button id='btn-play-$ref' class='btn btn-success btn-player' onclick='play_pause($ref)'><i id='ico-play-$ref' class='glyphicon glyphicon-play'></i></button>
-                    <button class='btn btn-danger btn-player pull-right' onclick='stop($ref)'><i class='glyphicon glyphicon-stop'></i></button>
+                    <button id='btn-play-$ref' class='btn btn-success btn-player' onclick='play($ref)'><i class='glyphicon glyphicon-fast-backward'></i> <i class='glyphicon glyphicon-play'></i></button>
+                    <button id='btn-pause-$ref' class='btn btn-warning btn-player' onclick='pause($ref)'><i class='glyphicon glyphicon-play'></i> <i class='glyphicon glyphicon-pause'></i></button>
+                    <button id='btn-stop-$ref'class='btn btn-danger btn-player' onclick='stop($ref)'><i class='glyphicon glyphicon-stop'></i></button>
                 </div>
             </div>
 
