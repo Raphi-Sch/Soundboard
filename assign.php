@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 // Options
 $options = "";
-$result = db_query_raw($db, "SELECT * FROM audio WHERE audio.reference NOT IN (SELECT active.audio FROM active) ORDER BY audio.name");
+$result = db_query_raw($db, "SELECT * FROM audio WHERE audio.reference NOT IN (SELECT active.audio FROM active WHERE audio IS NOT NULL) ORDER BY audio.name");
 while($row = mysqli_fetch_assoc($result)) {
     $ref = $row['reference'];
     $name = $row['name'];
