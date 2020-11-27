@@ -74,7 +74,7 @@ function load_parameters(config){
 }
 
 function key_pressed(event){
-  var alt = event.altKey;
+  var alt = event.shiftKey;
   var key = event.which || event.keyCode;
   // Space pressed => All players stop
   if(key == 32){
