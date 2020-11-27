@@ -82,7 +82,9 @@ function key_pressed(event){
   }
     
   if((key >= 65 && key <= 90)){
-    if(shortkey[key])
+    if(shortkey[key]){
+      players_state.forEach(function (playing, index){stop(index);})
       play(shortkey[key]);
+    }
   }
 }
