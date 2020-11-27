@@ -9,6 +9,7 @@ function play(id){
   intervals[id] = setInterval(() => {
     play_progress(id)
   }, 100);
+  document.getElementById('btn-play-' + id).blur();
 }
 
 function pause(id){
@@ -16,11 +17,13 @@ function pause(id){
     // Playing
     players_state[id] = false;
     document.getElementById('player-' + id).pause();
+    document.getElementById('btn-pause-' + id).blur();
   }
   else{
     // Pause
     players_state[id] = true;
     document.getElementById('player-' + id).play();
+    document.getElementById('btn-pause-' + id).blur();
   }
 }
 
@@ -30,6 +33,7 @@ function stop(id){
   document.getElementById('player-' + id).currentTime = 0;
   document.getElementById('progress-bar-' + id).style.width = "0%";
   clearInterval(intervals[id]);
+  document.getElementById('btn-stop-' + id).blur();
 }
 
 function play_progress(id){
@@ -63,4 +67,18 @@ function load_parameters(config){
     document.getElementById('player-' + id).volume = value[0];
     document.getElementById('player-' + id).playbackRate = value[1];
   };
+}
+
+function key_pressed(event){
+  var key = event.which || event.keyCode;
+  // Space pressed => All players stop
+  if(key == 32){
+    players_state.forEach(function (playing, index){stop(index);})
+    return;
+  }
+    
+  if((key >= 65 && key <= 90)){
+    console.log(key);
+    play(shortkey[key]);
+  }
 }
