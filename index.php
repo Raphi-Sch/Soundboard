@@ -76,8 +76,8 @@ while($row = mysqli_fetch_assoc($data)) {
     ";
 }
 
-$JSON_params = json_encode($params_array);
-$JSON_shortkey = json_encode($shortkey_array);
+$JSON_params = json_encode($params_array, JSON_FORCE_OBJECT);
+$JSON_shortkey = json_encode($shortkey_array, JSON_FORCE_OBJECT);
 
 ?>
 
@@ -104,7 +104,13 @@ $JSON_shortkey = json_encode($shortkey_array);
     <script src='src/js/player.js'></script>
     <script>
         var params = JSON.parse('<?php echo $JSON_params; ?>');
-        var shortkey = JSON.parse('<?php echo $JSON_shortkey; ?>');
+        var shortkey_obj = JSON.parse('<?php echo $JSON_shortkey; ?>');
+        var shortkey = [];
+
+        for (const [id, value] of Object.entries(shortkey_obj)) {
+            shortkey[id] = value;
+        };
+
         $(document).ready(function() {
             document.getElementById("index").className="active"; 
             load_parameters(params);

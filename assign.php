@@ -13,11 +13,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         db_query_no_result($db, "DELETE FROM active WHERE reference = '$reference'");
     }
 
-    if($_POST['action'] == "edit" && !empty($_POST['reference'])){
+    if($_POST['action'] == "edit-audio" && !empty($_POST['reference'])){
       $reference = addslashes(trim($_POST['reference']));
       $audio = addslashes(trim($_POST['audio']));
       db_query_no_result($db, "UPDATE `active` SET `audio` = '$audio' WHERE reference = '$reference'");
     }
+
+    if($_POST['action'] == "edit-shortkey" && !empty($_POST['reference'])){
+        $reference = addslashes(trim($_POST['reference']));
+        $shortkey = mb_ord(strtoupper(addslashes(trim($_POST['shortkey']))), "utf8");
+        db_query_no_result($db, "UPDATE `active` SET `shortkey` = '$shortkey' WHERE reference = '$reference'");
+      }
 
     header('Location: /assign.php');
     exit();
@@ -33,14 +39,17 @@ while($row = mysqli_fetch_assoc($result)) {
 }
 
 $HTML = "";
-$result = db_query_raw($db, "SELECT active.reference, audio.name FROM active LEFT JOIN audio ON active.audio = audio.reference ORDER BY active.reference");
+$result = db_query_raw($db, "SELECT active.reference, active.shortkey, audio.name FROM active LEFT JOIN audio ON active.audio = audio.reference ORDER BY active.reference");
 while($row = mysqli_fetch_assoc($result)) {
+    $shortkey = $row['shortkey'] ? "&#".$row['shortkey'].";" : "";
     $HTML .= "
     <tr>
         <td id='ref_".$row["reference"]."'>".$row["reference"]."</td>
+        <td id='shortkey_".$row["reference"]."'>".$shortkey."</td>
         <td id='name_".$row["reference"]."'>".$row["name"]."</td>
         <td>
-            <button onClick='edit_entry(\"".$row["reference"]."\")' class='btn btn-warning' type='button'><i class='glyphicon glyphicon-pencil'></i></button>
+            <button onClick='edit_audio(\"".$row["reference"]."\")' class='btn btn-warning' type='button'><i class='glyphicon glyphicon-volume-up'></i></button>
+            <button onClick='edit_shortkey(\"".$row["reference"]."\")' class='btn btn-warning' type='button'><i class='glyphicon glyphicon-pencil'></i></button>
             <button type='button' class='btn btn-danger' onclick='del_entry(\"".$row['reference']."\")'><i class='glyphicon glyphicon-remove'></i></button>
         </td>
     </tr>";
@@ -60,26 +69,22 @@ while($row = mysqli_fetch_assoc($result)) {
 
     <!-- Main area -->
     <div class="main col-md-10 col-md-offset-1">
-        <table class="table table-hover table-condensed">
-            <thead>
-                <tr>
-                    <th class="col-xs-1">Player</th>
-                    <th>Audio</th>
-                    <th class="col-xs-2"></th>
-                </tr>
-                <tr>
-                    <form method="post">
-                        <input type='hidden' name='action' value='add'>
-                        <td></td>
-                        <td></td>
-                        <td><button type="submit" class="btn btn-success" name="action" value="add"><i class="glyphicon glyphicon-plus"></i></button></td>
-                    </form>
-                </tr>
-            </thead>
-            <tbody>
-                <?php echo $HTML; ?>
-            </tbody>
-        </table>
+        <form method="post">
+            <input type='hidden' name='action' value='add'>
+            <table class="table table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th class="col-xs-1">Player</th>
+                        <th class="col-xs-1">Shortkey</th>
+                        <th>Audio</th>
+                        <th class="col-xs-2"><button type="submit" class="btn btn-success" name="action" value="add"><i class="glyphicon glyphicon-plus"></i></button></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php echo $HTML; ?>
+                </tbody>
+            </table>
+        </form>
     </div>
 
     <!-- Footer -->
@@ -109,14 +114,35 @@ while($row = mysqli_fetch_assoc($result)) {
             })
         }
 
-        function edit_entry(ref){
+        function edit_audio(ref){
             value = document.getElementById("name_" + ref).innerText;
             Swal({
-                title: 'Editing name of : "' + ref + '"',
+                title: 'Editing audio of : "' + ref + '"',
                 type: 'info',
-                html:   "<form id='swal-form' method='post'><input type='hidden' name='action' value='edit'>"+
+                html:   "<form id='swal-form' method='post'><input type='hidden' name='action' value='edit-audio'>"+
                         "<input type='hidden' name='reference' value='" + ref + "'>"+
-                        "<select class='form-control' name='audio'><?php echo $options;?></select>"+
+                        "<select id='swal-select' class='form-control' name='audio'><?php echo $options;?></select>"+
+                        "</form>",
+                showCancelButton: true,
+                focusConfirm: false,
+                allowOutsideClick: false,
+                width: "30%",
+                confirmButtonText: 'Edit',
+                cancelButtonText: 'Cancel'
+            }).then((result) =>{
+                if(result.value)
+                    document.getElementById('swal-form').submit();
+            })
+        }
+
+        function edit_shortkey(ref){
+            shortkey = document.getElementById("shortkey_" + ref).innerText;
+            Swal({
+                title: 'Editing shortkey of : "' + ref + '"',
+                type: 'info',
+                html:   "<form id='swal-form' method='post'><input type='hidden' name='action' value='edit-shortkey'>"+
+                        "<input type='hidden' name='reference' value='" + ref + "'>"+
+                        "<input type='text' class='form-control' name='shortkey' maxlength='1' value='" + shortkey + "'>"+
                         "</form>",
                 showCancelButton: true,
                 focusConfirm: false,

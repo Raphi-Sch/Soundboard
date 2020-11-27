@@ -78,7 +78,7 @@ function key_pressed(event){
   }
     
   if((key >= 65 && key <= 90)){
-    console.log(key);
-    play(shortkey[key]);
+    if(shortkey[key])
+      play(shortkey[key]);
   }
 }
