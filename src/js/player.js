@@ -74,6 +74,7 @@ function load_parameters(config){
 }
 
 function key_pressed(event){
+  var alt = event.altKey;
   var key = event.which || event.keyCode;
   // Space pressed => All players stop
   if(key == 32){
@@ -82,9 +83,15 @@ function key_pressed(event){
   }
     
   if((key >= 65 && key <= 90)){
-    if(shortkey[key]){
-      players_state.forEach(function (playing, index){stop(index);})
-      play(shortkey[key]);
+    id = shortkey[key];
+    if(id){
+      if(alt){
+        pause(id)
+      }
+      else{
+        players_state.forEach(function (playing, index){stop(index);})
+        play(id);
+      }
     }
   }
 }
