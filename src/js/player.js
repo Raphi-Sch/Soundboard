@@ -14,20 +14,20 @@ function play(id){
 
 function pause(id){
   if(players_state[id]){ 
-    // Playing
+    // Play -> pause
     players_state[id] = false;
     document.getElementById('player-' + id).pause();
+    document.getElementById('btn-pause-' + id).blur();
+    clearInterval(intervals[id]);
+  }
+  else{
+    // Pause -> Play
+    players_state[id] = true;
+    document.getElementById('player-' + id).play();
     document.getElementById('btn-pause-' + id).blur();
     intervals[id] = setInterval(() => {
       play_progress(id)
     }, 100);
-  }
-  else{
-    // Pause
-    players_state[id] = true;
-    document.getElementById('player-' + id).play();
-    document.getElementById('btn-pause-' + id).blur();
-    clearInterval(intervals[id]);
   }
 }
 
