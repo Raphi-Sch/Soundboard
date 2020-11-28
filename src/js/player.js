@@ -105,6 +105,7 @@ function key_pressed(event){
 
   if(key == 188){
     random_key = 65 + Math.floor(Math.random() * Math.floor(25));
+    players_state.forEach(function (playing, index){stop(index);})
     play(shortkey[random_key]);
     return;
   }
