@@ -56,7 +56,7 @@ while($row = mysqli_fetch_assoc($result)) {
         <td id='page_".$row["reference"]."'>".$row["page"]."</td>
         <td id='name_".$row["reference"]."'>".$row["name"]."</td>
         <td>
-            <button onClick='edit_audio(\"".$row["reference"]."\")' class='btn btn-warning' type='button'><i class='glyphicon glyphicon-volume-up'></i></button>
+            <button onClick='edit_audio(\"".$row["reference"]."\")' class='btn btn-info' type='button'><i class='glyphicon glyphicon-volume-up'></i></button>
             <button onClick='edit(\"".$row["reference"]."\")' class='btn btn-warning' type='button'><i class='glyphicon glyphicon-pencil'></i></button>
         </td>
     </tr>";
