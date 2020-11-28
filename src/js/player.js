@@ -104,8 +104,8 @@ function key_pressed(event){
   }
 
   if(key == 161){
-    id = 65 + Math.floor(Math.random() * Math.floor(25));
-    play(id);
+    random_key = 65 + Math.floor(Math.random() * Math.floor(25));
+    play(shortkey[random_key]);
     return;
   }
 
