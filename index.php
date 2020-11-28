@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 if(isset($_GET["page"]))
     $page = addslashes(trim($_GET["page"]));
 else
-    $page = 1;
+    $page = 0;
 
 $data = db_query_raw($db, "SELECT active.*, audio.file, audio.name FROM active, audio WHERE active.audio = audio.reference AND active.page = '$page' ORDER BY active.reference ");
 $HTML_players = "";
