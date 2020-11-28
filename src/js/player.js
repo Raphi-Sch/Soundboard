@@ -102,4 +102,11 @@ function key_pressed(event){
     }
     return;
   }
+
+  if(key == 33){
+    id = 65 + Math.floor(Math.random() * Math.floor(25));
+    play(id);
+    return;
+  }
+
 }
