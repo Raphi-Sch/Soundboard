@@ -47,7 +47,6 @@ while($row = mysqli_fetch_assoc($data)) {
                     <button id='btn-stop-$ref' class='btn btn-danger btn-player' onclick='stop($ref)'><i class='glyphicon glyphicon-stop'></i></button>
                 </div>
             </div>
-
             <br/>
             <div class='row'>
                 <div class='col-md-1'>
@@ -61,7 +60,6 @@ while($row = mysqli_fetch_assoc($data)) {
                 </div>
             </div>
 
-            <br/>
             <div class='row'>
                 <div class='col-md-1'>
                     <i class='glyphicon glyphicon-dashboard'></i>
