@@ -18,7 +18,7 @@ if(isset($_GET["page"]))
 else
     $page = 0;
 
-$data = db_query_raw($db, "SELECT active.*, audio.file, audio.name FROM active, audio WHERE active.audio = audio.reference AND active.page = '$page' ORDER BY active.reference ");
+$data = db_query_raw($db, "SELECT active.*, audio.file, audio.name FROM active LEFT JOIN audio ON active.audio = audio.reference WHERE active.page = '$page' ORDER BY active.reference ");
 $HTML_players = "";
 $params_array = [];
 $shortkey_array = [];
@@ -30,6 +30,9 @@ while($row = mysqli_fetch_assoc($data)) {
     $speed = $row['speed'];
     $shortkey = $row['shortkey'] ? "&#".$row['shortkey'].";" : "";
     $params_array[$ref] = [$volume, $speed];
+
+    if(empty($row['audio']))
+        $name = "- - EMPTY - -";
 
     if($row['shortkey'])
         $shortkey_array[$row['shortkey']] = $ref;
