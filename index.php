@@ -85,8 +85,8 @@ $JSON_params = json_encode($params_array, JSON_FORCE_OBJECT);
 $JSON_shortkey = json_encode($shortkey_array, JSON_FORCE_OBJECT);
 
 $HTML_pages = "";
-for($i = 1; $i <= 10; $i++){
-    $HTML_pages .= "<li id='page-$i'><a href='?page=$i'>$i</a></li>";
+for($i = 0; $i <= 9; $i++){
+    $HTML_pages .= "<li id='page-$i'><a id='page-a-$i' href='?page=$i'>$i</a></li>";
 }
 
 ?>
