@@ -103,7 +103,7 @@ function key_pressed(event){
     return;
   }
 
-  if(key == 161){
+  if(key == 188){
     random_key = 65 + Math.floor(Math.random() * Math.floor(25));
     play(shortkey[random_key]);
     return;
