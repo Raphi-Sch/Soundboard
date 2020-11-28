@@ -8,10 +8,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         db_query_no_result($db, "INSERT INTO `active` (`reference`, `volume`, `speed`, `audio`) VALUES (NULL, '1', '1', NULL);");
     }
 
-    if($_POST['action'] == "del" && !empty($_POST['reference'])){
+    /*if($_POST['action'] == "del" && !empty($_POST['reference'])){
         $reference = addslashes(trim($_POST['reference']));
         db_query_no_result($db, "DELETE FROM active WHERE reference = '$reference'");
-    }
+    }*/
 
     if($_POST['action'] == "edit-audio" && !empty($_POST['reference'])){
         $reference = addslashes(trim($_POST['reference']));
@@ -58,7 +58,6 @@ while($row = mysqli_fetch_assoc($result)) {
         <td>
             <button onClick='edit_audio(\"".$row["reference"]."\")' class='btn btn-warning' type='button'><i class='glyphicon glyphicon-volume-up'></i></button>
             <button onClick='edit(\"".$row["reference"]."\")' class='btn btn-warning' type='button'><i class='glyphicon glyphicon-pencil'></i></button>
-            <button type='button' class='btn btn-danger' onclick='del_entry(\"".$row['reference']."\")'><i class='glyphicon glyphicon-remove'></i></button>
         </td>
     </tr>";
 }
