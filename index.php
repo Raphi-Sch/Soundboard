@@ -12,8 +12,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     exit();
 }
 
+// Page
+if(isset($_GET["page"]))
+    $page = addslashes(trim($_GET["page"]));
+else
+    $page = 1;
 
-$data = db_query_raw($db, "SELECT active.*, audio.file, audio.name FROM active, audio WHERE active.audio = audio.reference ORDER BY active.reference ");
+$data = db_query_raw($db, "SELECT active.*, audio.file, audio.name FROM active, audio WHERE active.audio = audio.reference AND active.page = '$page' ORDER BY active.reference ");
 $HTML_players = "";
 $params_array = [];
 $shortkey_array = [];
@@ -79,6 +84,11 @@ while($row = mysqli_fetch_assoc($data)) {
 $JSON_params = json_encode($params_array, JSON_FORCE_OBJECT);
 $JSON_shortkey = json_encode($shortkey_array, JSON_FORCE_OBJECT);
 
+$HTML_pages = "";
+for($i = 1; $i <= 10; $i++){
+    $HTML_pages .= "<li id='page-$i'><a href='?page=$i'>$i</a></li>";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -92,8 +102,14 @@ $JSON_shortkey = json_encode($shortkey_array, JSON_FORCE_OBJECT);
     <!-- Navbar -->
     <?php include('src/php/navbar.php');?>
 
-    <!-- Main area -->
+    <!-- Main -->
     <div class="main col-md-12">
+        <!-- Tabs -->
+        <ul class="nav nav-tabs">
+            <?php echo $HTML_pages; ?>
+        </ul>
+
+        <!-- Players -->
         <div class='wrapper'>
             <?php echo $HTML_players ?>
         </div>
@@ -112,7 +128,8 @@ $JSON_shortkey = json_encode($shortkey_array, JSON_FORCE_OBJECT);
         };
 
         $(document).ready(function() {
-            document.getElementById("index").className="active"; 
+            document.getElementById("index").className="active";
+            document.getElementById("page-<?php echo $page;?>").className="active";
             load_parameters(params);
         });
     </script>
