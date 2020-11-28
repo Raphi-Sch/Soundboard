@@ -67,7 +67,7 @@ while($row = mysqli_fetch_assoc($result)) {
 <html lang="fr">
   <head>
     <?php include('src/html/header.html');?>
-    <title>Soundboard - Library</title>
+    <title>Soundboard - Assign</title>
   </head>
 
   <body>
