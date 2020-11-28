@@ -14,9 +14,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
 
     if($_POST['action'] == "edit-audio" && !empty($_POST['reference'])){
-      $reference = addslashes(trim($_POST['reference']));
-      $audio = addslashes(trim($_POST['audio']));
-      db_query_no_result($db, "UPDATE `active` SET `audio` = '$audio' WHERE reference = '$reference'");
+        $reference = addslashes(trim($_POST['reference']));
+        $audio = addslashes(trim($_POST['audio']));
+        $audio == "none" ? $audio = "NULL" : $audio = "'".$audio."'";
+        db_query_no_result($db, "UPDATE `active` SET `audio` = $audio WHERE reference = '$reference'");
     }
 
     if($_POST['action'] == "edit" && !empty($_POST['reference'])){
@@ -36,7 +37,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 
 // Options
-$options = "";
+$options = "<option value='none'>None</option>";
 $result = db_query_raw($db, "SELECT * FROM audio WHERE audio.reference NOT IN (SELECT active.audio FROM active WHERE audio IS NOT NULL) ORDER BY audio.name");
 while($row = mysqli_fetch_assoc($result)) {
     $ref = $row['reference'];
