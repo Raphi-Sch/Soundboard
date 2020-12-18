@@ -105,7 +105,7 @@ while($row = mysqli_fetch_assoc($result)) {
 
         function del_entry(ref){
             value = document.getElementById("ref_" + ref).innerText;
-            Swal({
+            Swal.fire({
                 title: "Delete '" + value + "' ?",
                 type: 'question',
                 showCancelButton: true,
@@ -124,12 +124,12 @@ while($row = mysqli_fetch_assoc($result)) {
 
         function edit_audio(ref){
             value = document.getElementById("name_" + ref).innerText;
-            Swal({
+            Swal.fire({
                 title: 'Editing audio of : "' + ref + '"',
                 type: 'info',
-                html:   "<form id='swal-form' method='post'><input type='hidden' name='action' value='edit-audio'>"+
+                html:   "<form id='Swal.fire-form' method='post'><input type='hidden' name='action' value='edit-audio'>"+
                         "<input type='hidden' name='reference' value='" + ref + "'>"+
-                        "<select id='swal-select' class='form-control' name='audio'><?php echo $options;?></select>"+
+                        "<select id='Swal.fire-select' class='form-control' name='audio'><?php echo $options;?></select>"+
                         "</form>",
                 showCancelButton: true,
                 focusConfirm: false,
@@ -139,17 +139,17 @@ while($row = mysqli_fetch_assoc($result)) {
                 cancelButtonText: 'Cancel'
             }).then((result) =>{
                 if(result.value)
-                    document.getElementById('swal-form').submit();
+                    document.getElementById('Swal.fire-form').submit();
             })
         }
 
         function edit(ref){
             shortkey = document.getElementById("shortkey_" + ref).innerText;
             page = document.getElementById("page_" + ref).innerText;
-            Swal({
+            Swal.fire({
                 title: 'Editing shortkey of : "' + ref + '"',
                 type: 'info',
-                html:   "<form id='swal-form' method='post'><input type='hidden' name='action' value='edit'>"+
+                html:   "<form id='Swal.fire-form' method='post'><input type='hidden' name='action' value='edit'>"+
                         "<input type='hidden' name='reference' value='" + ref + "'>"+
                         "<input type='text' class='form-control' name='shortkey' maxlength='1' value='" + shortkey + "'>"+
                         "<input type='number' class='form-control' name='page' min=0 max=9 step=1 value='" + page + "'>"+
@@ -162,7 +162,7 @@ while($row = mysqli_fetch_assoc($result)) {
                 cancelButtonText: 'Cancel'
             }).then((result) =>{
                 if(result.value)
-                    document.getElementById('swal-form').submit();
+                    document.getElementById('Swal.fire-form').submit();
             })
         }
     </script>
