@@ -1,2 +1,6 @@
 # Soundboard
-Simple Web Soundboard using PHP >7.0
+Simple Web Soundboard
+
+# Require :
+- Apache2
+- PHP >7.2
