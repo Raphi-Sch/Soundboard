@@ -114,7 +114,7 @@ while($row = mysqli_fetch_assoc($result)) {
             Swal.fire({
                 title: 'Editing name of : "' + ref + '"',
                 type: 'info',
-                html: "<form id='Swal.fire-form' method='post'><input type='hidden' name='action' value='edit'><input type='hidden' name='reference' value='" + ref + "'><input class='form-control' type='text' name='name' value=\"" + value + "\"></form>",
+                html: "<form id='Swal-form' method='post'><input type='hidden' name='action' value='edit'><input type='hidden' name='reference' value='" + ref + "'><input class='form-control' type='text' name='name' value=\"" + value + "\"></form>",
                 showCancelButton: true,
                 focusConfirm: false,
                 allowOutsideClick: false,
@@ -123,7 +123,7 @@ while($row = mysqli_fetch_assoc($result)) {
                 cancelButtonText: 'Cancel'
             }).then((result) =>{
                 if(result.value)
-                    document.getElementById('Swal.fire-form').submit();
+                    document.getElementById('Swal-form').submit();
             })
         }
     </script>
