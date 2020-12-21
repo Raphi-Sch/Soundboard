@@ -31,12 +31,12 @@ body {
 /* Button */
 
 .btn {        
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bold;
 }
 
 .btn-player{
-  width: 30%;
+  width: 32%;
 }
 
 /* Grid */
@@ -49,7 +49,7 @@ body {
 
 .card {
   background: #2f3542;
-  width: 300px;
+  width: 250px;
   padding: 10px !important;
   margin: 2px;
 }
