@@ -11,6 +11,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $file_name = file_upload("audio", dirname(__FILE__)."/src/audio", "", false, md5(time()));
         if($file_name)
             db_query_no_result($db, "INSERT INTO audio VALUES (NULL, '$name', '$file_name')");
+
+        header('Location: /library.php');
+        exit();
     }
 
     if($_POST['action'] == "del" && !empty($_POST['reference'])){
@@ -19,15 +22,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         shell_exec("sudo rm src/audio/$file");
         db_query_no_result($db, "DELETE FROM audio WHERE reference = '$reference'");
         db_query_no_result($db, "UPDATE active SET audio = NULL WHERE audio = '$reference'");
+        exit();
     }
 
     if($_POST['action'] == "edit" && !empty($_POST['reference'])){
       $reference = addslashes(trim($_POST['reference']));
       $name = addslashes(trim($_POST['name']));
       db_query_no_result($db, "UPDATE `audio` SET `name` = '$name' WHERE reference = '$reference'");
+      exit();
     }
 
-    header('Location: /library.php');
     exit();
 }
 
