@@ -29,6 +29,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $reference = addslashes(trim($_POST['reference']));
       $name = addslashes(trim($_POST['name']));
       db_query_no_result($db, "UPDATE `audio` SET `name` = '$name' WHERE reference = '$reference'");
+      header('Location: /library.php');
       exit();
     }
 
