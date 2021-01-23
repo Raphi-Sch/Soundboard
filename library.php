@@ -19,7 +19,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if($_POST['action'] == "del" && !empty($_POST['reference'])){
         $reference = addslashes(trim($_POST['reference']));
         $file = db_query($db, "SELECT `file` FROM audio WHERE reference = '$reference'")['file'];
-        shell_exec("sudo rm src/audio/$file");
+        shell_exec("rm src/audio/$file");
         db_query_no_result($db, "DELETE FROM audio WHERE reference = '$reference'");
         db_query_no_result($db, "UPDATE active SET audio = NULL WHERE audio = '$reference'");
         exit();
