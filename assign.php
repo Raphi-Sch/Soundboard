@@ -151,8 +151,8 @@ while($row = mysqli_fetch_assoc($result)) {
                 type: 'info',
                 html:   "<form id='Swal-form' method='post'><input type='hidden' name='action' value='edit'>"+
                         "<input type='hidden' name='reference' value='" + ref + "'>"+
-                        "<input type='text' class='form-control' name='shortkey' maxlength='1' value='" + shortkey + "'>"+
-                        "<input type='number' class='form-control' name='page' min=0 max=9 step=1 value='" + page + "'>"+
+                        "<input type='text' class='form-control' name='shortkey' maxlength='1' value='" + shortkey + "' placeholder='shortkey'><br/>"+
+                        "<input type='number' class='form-control' name='page' min=0 max=9 step=1 value='" + page + "' placeholder='page'>"+
                         "</form>",
                 showCancelButton: true,
                 focusConfirm: false,
