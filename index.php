@@ -28,7 +28,7 @@ while($row = mysqli_fetch_assoc($data)) {
     $file = $row['file'];
     $volume = $row['volume'];
     $speed = $row['speed'];
-    $loop_enable = $row['loop_enable'] ? 'true' : 'false';
+    $loop_enable = $row['loop_enable'] ? true : false;
     $loop_enable_HTML = $row['loop_enable'] ? "checked" : "";
     $shortkey = $row['shortkey'] ? "&#".$row['shortkey'].";" : "";
 

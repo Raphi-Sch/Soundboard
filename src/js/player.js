@@ -76,7 +76,7 @@ function load_parameters(config){
   for (const [id, value] of Object.entries(config)) {
     document.getElementById('player-' + id).volume = parseFloat(value.volume);
     document.getElementById('player-' + id).playbackRate = parseFloat(value.speed);
-    document.getElementById('player-' + id).loop = (value.loop === 'true');
+    document.getElementById('player-' + id).loop = value.loop;
   };
 }
 
