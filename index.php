@@ -22,10 +22,9 @@ else
 $data = db_query_raw($db, "SELECT active.*, audio.file, audio.name FROM active LEFT JOIN audio ON active.audio = audio.reference WHERE active.page = '$page' ORDER BY active.reference ");
 $HTML_players = "";
 $params_array = [];
-$shortkey_array = [];
 while($row = mysqli_fetch_assoc($data)) {
     $ref = $row['reference'];
-    $name = $row['name'];
+    $name = empty($row['audio']) ? "- - EMPTY - -" : $row['name'];
     $file = $row['file'];
     $volume = $row['volume'];
     $speed = $row['speed'];
@@ -34,13 +33,7 @@ while($row = mysqli_fetch_assoc($data)) {
     $shortkey = $row['shortkey'] ? "&#".$row['shortkey'].";" : "";
 
     // Parameters JSON
-    $params_array[$ref] = ['volume' => $volume, 'speed' => $speed, 'loop' => $loop_enable];
-
-    if(empty($row['audio']))
-        $name = "- - EMPTY - -";
-
-    if($row['shortkey'])
-        $shortkey_array[$row['shortkey']] = $ref;
+    $params_array[$ref] = ['volume' => $volume, 'speed' => $speed, 'loop' => $loop_enable, 'shortkey' => $row['shortkey']];
 
     $HTML_players .= "
         <div class='card'>
@@ -97,7 +90,6 @@ while($row = mysqli_fetch_assoc($data)) {
 }
 
 $JSON_params = json_encode($params_array, JSON_FORCE_OBJECT);
-$JSON_shortkey = json_encode($shortkey_array, JSON_FORCE_OBJECT);
 
 $HTML_pages = "";
 for($i = 0; $i <= 9; $i++){
@@ -135,11 +127,10 @@ for($i = 0; $i <= 9; $i++){
     <script src='src/js/player.js'></script>
     <script>
         var params = JSON.parse('<?php echo $JSON_params; ?>');
-        var shortkey_obj = JSON.parse('<?php echo $JSON_shortkey; ?>');
         var shortkey = [];
 
-        for (const [id, value] of Object.entries(shortkey_obj)) {
-            shortkey[id] = value;
+        for (const [id, value] of Object.entries(params)) {
+            shortkey[value.shortkey] = id;
         };
 
         $(document).ready(function() {
