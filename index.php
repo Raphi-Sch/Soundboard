@@ -6,7 +6,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $reference = addslashes(trim($_POST['reference']));
         $volume = addslashes(trim($_POST['volume']));
         $speed = addslashes(trim($_POST['speed']));
-        $loop_enable =  isset($_POST['loop_enable']) ? 1 : 0;
+        $loop_enable = $_POST['loop_enable'] == 'true' ? 1 : 0;
 
         db_query_no_result($db, "UPDATE `active` SET `volume` = '$volume', `speed` = '$speed', `loop_enable` = '$loop_enable' WHERE reference = '$reference'");
     }
@@ -29,12 +29,12 @@ while($row = mysqli_fetch_assoc($data)) {
     $file = $row['file'];
     $volume = $row['volume'];
     $speed = $row['speed'];
-    $loop_enable = $row['loop_enable'];
-    $loop_enable_HTML = $loop_enable ? "checked" : "";
+    $loop_enable = $row['loop_enable'] ? 'true' : 'false';
+    $loop_enable_HTML = $row['loop_enable'] ? "checked" : "";
     $shortkey = $row['shortkey'] ? "&#".$row['shortkey'].";" : "";
 
     // Parameters JSON
-    $params_array[$ref] = [$volume, $speed, $loop_enable];
+    $params_array[$ref] = ['volume' => $volume, 'speed' => $speed, 'loop' => $loop_enable];
 
     if(empty($row['audio']))
         $name = "- - EMPTY - -";
