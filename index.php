@@ -6,8 +6,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $reference = addslashes(trim($_POST['reference']));
         $volume = addslashes(trim($_POST['volume']));
         $speed = addslashes(trim($_POST['speed']));
+        $loop_enable =  isset($_POST['loop_enable']) ? 1 : 0;
 
-        db_query_no_result($db, "UPDATE `active` SET `volume` = '$volume', `speed` = '$speed' WHERE reference = '$reference'");
+        db_query_no_result($db, "UPDATE `active` SET `volume` = '$volume', `speed` = '$speed', `loop_enable` = '$loop_enable' WHERE reference = '$reference'");
     }
     exit();
 }
@@ -28,8 +29,12 @@ while($row = mysqli_fetch_assoc($data)) {
     $file = $row['file'];
     $volume = $row['volume'];
     $speed = $row['speed'];
+    $loop_enable = $row['loop_enable'];
+    $loop_enable_HTML = $loop_enable ? "checked" : "";
     $shortkey = $row['shortkey'] ? "&#".$row['shortkey'].";" : "";
-    $params_array[$ref] = [$volume, $speed];
+
+    // Parameters JSON
+    $params_array[$ref] = [$volume, $speed, $loop_enable];
 
     if(empty($row['audio']))
         $name = "- - EMPTY - -";
@@ -68,10 +73,19 @@ while($row = mysqli_fetch_assoc($data)) {
                     <i class='glyphicon glyphicon-dashboard'></i>
                 </div>
                 <div class='col-md-8'>
-                    <input id='speed-range-$ref' type='range' min=0.25 max=2 step=0.25 value='$speed' oninput='change_speed($ref)' onchange='save_parameters($ref)'>
+                    <input id='speed-range-$ref' type='range' min=0.30 max=2 step=0.1 value='$speed' oninput='change_speed($ref)' onchange='save_parameters($ref)'>
                 </div>
                 <div class='col-md-2'>
                     <p id='speed-text-$ref'>x$speed</p>
+                </div>
+            </div>
+
+            <div class='row'>
+                <div class='col-md-1'>
+                    <i class='glyphicon glyphicon-repeat'></i>
+                </div>
+                <div class='col-md-1'>
+                    <input type='checkbox' id='loop-$ref' onclick='loop($ref)' onchange='save_parameters($ref)' $loop_enable_HTML>
                 </div>
             </div>
 

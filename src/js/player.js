@@ -59,17 +59,24 @@ function change_volume(id){
   document.getElementById('player-' + id).volume = current;
 }
 
+function loop(id){
+  current = document.getElementById('loop-' + id).checked;
+  document.getElementById("player-" + id).loop = current; 
+}
+
 function save_parameters(id){
   volume = document.getElementById('volume-range-' + id).value;
   speed = document.getElementById('speed-range-' + id).value;
-  
-  $.post("index.php", { action : "save_parameters", reference: id, volume: volume, speed: speed }); 
+  loop_enable = document.getElementById('loop-' + id).checked;
+
+  $.post("index.php", { action : "save_parameters", reference: id, volume: volume, speed: speed, loop_enable: loop_enable }); 
 }
 
 function load_parameters(config){
   for (const [id, value] of Object.entries(config)) {
     document.getElementById('player-' + id).volume = value[0];
     document.getElementById('player-' + id).playbackRate = value[1];
+    document.getElementById("player-" + id).loop = value[2];
   };
 }
 
