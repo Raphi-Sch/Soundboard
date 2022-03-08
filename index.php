@@ -30,7 +30,7 @@ while($row = mysqli_fetch_assoc($data)) {
     $speed = $row['speed'];
     $loop_enable = $row['loop_enable'] ? true : false;
     $loop_enable_HTML = $row['loop_enable'] ? "checked" : "";
-    $shortkey = $row['shortkey'] ? "&#".$row['shortkey'].";" : "";
+    $HTML_shortkey = $row['shortkey'] ? "&#".$row['shortkey'].";" : "";
 
     // Parameters JSON
     $params_array[$ref] = ['volume' => $volume, 'speed' => $speed, 'loop' => $loop_enable, 'shortkey' => $row['shortkey']];
@@ -39,7 +39,7 @@ while($row = mysqli_fetch_assoc($data)) {
         <div class='card'>
             <div class='row'>
                 <div class='col-md-12'>
-                    <div class='sample-title'>$name<div class='pull-right'>$shortkey</div></div>
+                    <div class='sample-title'>$name<div class='pull-right'>$HTML_shortkey</div></div>
                     <div class='progress'>
                         <div id='progress-bar-$ref' class='progress-bar progress-bar-success' role='progressbar' style='width:0%'></div>
                     </div>
