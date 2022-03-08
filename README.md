@@ -4,7 +4,7 @@
 - Sequencer
 
 # Require :
-- Apache2
+- Any webserver (tested on Apache2)
 - PHP >= 7.2
 
 # Shortcut :
