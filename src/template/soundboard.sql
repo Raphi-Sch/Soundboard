@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2~bpo10+1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:3306
--- Généré le : mar. 24 nov. 2020 à 09:31
--- Version du serveur :  10.3.25-MariaDB-0+deb10u1
+-- Hôte : localhost
+-- Généré le : mar. 08 mars 2022 à 11:00
+-- Version du serveur : 10.3.29-MariaDB-0+deb10u1
 -- Version de PHP : 7.3.19-1~deb10u1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -32,7 +31,9 @@ CREATE TABLE `active` (
   `reference` smallint(6) NOT NULL,
   `volume` float NOT NULL DEFAULT 1,
   `speed` float NOT NULL DEFAULT 1,
-  `audio` int(11) DEFAULT NULL
+  `audio` int(11) DEFAULT NULL,
+  `page` int(11) DEFAULT NULL,
+  `shortkey` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
