@@ -1,6 +1,6 @@
 # Soundboard
-- Built-in library storage
-- Solo sample player
+- Built-in sample library storage
+- Sample player
 - Sequencer
 
 # Require :
