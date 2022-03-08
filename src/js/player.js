@@ -89,6 +89,12 @@ function key_pressed(event){
   var shift = event.shiftKey;
   var key = event.which || event.keyCode;
 
+  // Insert => Enable/disable overlap
+  if(key == 45){
+    overlap_playing = !overlap_playing;
+    document.getElementById("global-overlap").checked = overlap_playing;
+  }
+
   // Space pressed => All players stop
   if(key == 32){
     players_state.forEach(function (playing, index){stop(index);})

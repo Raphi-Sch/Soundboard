@@ -122,7 +122,7 @@ for($i = 0; $i <= 9; $i++){
         </div>
 
         <div class="checkbox">
-            <label><input type="checkbox" onchange="set_overlap_playing(this.checked)">Overlap</label>
+            <label><input id="global-overlap" type="checkbox" onchange="set_overlap_playing(this.checked)">Overlap</label>
         </div>
     </div>
 
