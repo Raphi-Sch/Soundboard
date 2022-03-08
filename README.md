@@ -6,6 +6,7 @@
 # Require :
 - Any webserver (tested on Apache2)
 - PHP >= 7.2
+- SQL server (MySQL or MariaDB)
 
 # Shortcut :
 - Any key from A to Z are assignable to sample or sequence
