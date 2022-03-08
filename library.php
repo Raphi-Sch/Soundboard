@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if($file_name)
             db_query_no_result($db, "INSERT INTO audio VALUES (NULL, '$name', '$file_name')");
 
-        header('Location: /library.php');
+        header('Location: library.php');
         exit();
     }
 
@@ -29,7 +29,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $reference = addslashes(trim($_POST['reference']));
       $name = addslashes(trim($_POST['name']));
       db_query_no_result($db, "UPDATE `audio` SET `name` = '$name' WHERE reference = '$reference'");
-      header('Location: /library.php');
+      header('Location: library.php');
       exit();
     }
 

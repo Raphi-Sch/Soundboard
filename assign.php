@@ -32,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         db_query_no_result($db, "UPDATE `active` SET `shortkey` = $shortkey, `page` = '$page' WHERE reference = '$reference'");
       }
 
-    header('Location: /assign.php');
+    header('Location: assign.php');
     exit();
 }
 
