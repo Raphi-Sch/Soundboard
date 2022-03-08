@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : mar. 08 mars 2022 à 15:56
+-- Généré le : mar. 08 mars 2022 à 15:58
 -- Version du serveur : 10.3.29-MariaDB-0+deb10u1
 -- Version de PHP : 7.3.19-1~deb10u1
 
@@ -61,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `sequencer` (
   `header` tinyint(1) NOT NULL,
   `audio` int(11) DEFAULT NULL,
   `next` int(11) DEFAULT NULL,
+  `shortkey` int(11) DEFAULT NULL,
   PRIMARY KEY (`reference`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 COMMIT;
