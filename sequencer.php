@@ -50,13 +50,16 @@ while($row = mysqli_fetch_assoc($data_header)) {
     $ref = $row['reference'];
     $name = empty($row['audio']) ? "- - EMPTY - -" : $row['name'];
     $file = $row['file'];
+    $HTML_shortkey = $row['shortkey'] ? "&#".$row['shortkey'].";" : "";
 
     $HTML_players .= "
         <div class='wrapper'>
             <div class='card'>
                 <div class='row'>
                     <div class='col-md-12'>
-                        <div class='sample-title'>$name</div>
+                        <div class='sample-title'>$name
+                            <div class='pull-right'>$HTML_shortkey</div>
+                        </div>
                         <div class='progress'>
                             <div id='progress-bar-$ref' class='progress-bar progress-bar-success' role='progressbar' style='width:0%'></div>
                         </div>
