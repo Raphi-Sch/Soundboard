@@ -14,8 +14,6 @@ function play(header_id){
 }
 
 function play_sequence(sequence){
-    console.log(sequence);
-
     id = sequence[sequence.length - 1];
     sequence.pop();
 
