@@ -4,7 +4,7 @@ var players_state = [];
 function play(header_id){
     //current_sequence = data_sequence[header_id];
     current_sequence = [];
-    for (const [id, data] of Object.entries(data_sequence[header_id])){
+    for (const [id, data] of Object.entries(data_sequence[header_id].sequence)){
         current_sequence.push(data.reference);
     }
 
@@ -43,4 +43,17 @@ function clear(id){
     document.getElementById('player-' + id).currentTime = 0;
     document.getElementById('progress-bar-' + id).style.width = "0%";
     clearInterval(intervals[id]);
+}
+
+function key_pressed(event){
+    var key = event.which || event.keyCode;
+
+    // A -> Z => play sequence
+    if(key >= 65 && key <= 90){
+        player_id = shortkey[key];
+        if(player_id){
+            play(player_id);
+        }
+        return;
+    }
 }

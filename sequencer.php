@@ -44,13 +44,12 @@ function build_sequence($db, $next, $order, &$data_player){
 }
 
 $HTML_players = "";
-$data_sequence = array();
+$data_all_sequences = array();
 $data_header = db_query_raw($db, "SELECT sequencer.*, audio.file, audio.name FROM sequencer LEFT JOIN audio ON sequencer.audio = audio.reference WHERE sequencer.header = 1 ORDER BY sequencer.reference");
 while($row = mysqli_fetch_assoc($data_header)) {
     $ref = $row['reference'];
     $name = empty($row['audio']) ? "- - EMPTY - -" : $row['name'];
     $file = $row['file'];
-    $chain_players = array();
 
     $HTML_players .= "
         <div class='wrapper'>
@@ -75,17 +74,18 @@ while($row = mysqli_fetch_assoc($data_header)) {
     ";
 
     // Header player
-    array_push($chain_players, ['reference' => $ref]);
+    $sequence = array();
+    array_push($sequence, ['reference' => $ref]);
 
     // Every element of that chain
-    $HTML_players .= build_sequence($db, $row['next'], 1, $chain_players);
-
+    $HTML_players .= build_sequence($db, $row['next'], 1, $sequence);
     $HTML_players .= "</div><br/>";
 
-    $data_sequence = $data_sequence + [$ref => $chain_players];
+    // Add to general array
+    $data_all_sequences = $data_all_sequences + [$ref => ['shortkey' => 'test', 'sequence' => $sequence]];
 }
 
-$JSON_data_sequence = json_encode($data_sequence, JSON_FORCE_OBJECT);
+$JSON_data_sequence = json_encode($data_all_sequences, JSON_FORCE_OBJECT);
 
 ?>
 
