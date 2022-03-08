@@ -32,14 +32,14 @@ function play_progress(id, sequence){
     document.getElementById('progress-bar-' + id).style.width = (current / duration) * 100 + "%";
 
     if(current == duration){
-        stop(id);
+        clear(id);
         if(sequence.length > 0){
             play_sequence(sequence);
         }
     }
 }
 
-function stop(id){
+function clear(id){
     players_state[id] = false;
     document.getElementById('player-' + id).pause();
     document.getElementById('player-' + id).currentTime = 0;
