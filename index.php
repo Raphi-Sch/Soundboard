@@ -120,6 +120,10 @@ for($i = 0; $i <= 9; $i++){
         <div class='wrapper'>
             <?php echo $HTML_players ?>
         </div>
+
+        <div class="checkbox">
+            <label><input type="checkbox" onchange="set_overlap_playing(this.checked)">Overlap</label>
+        </div>
     </div>
 
     <!-- Footer -->

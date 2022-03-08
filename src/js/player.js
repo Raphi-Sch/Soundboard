@@ -1,5 +1,6 @@
 var intervals = [];
 var players_state = [];
+var overlap_playing = false;
 
 function play(id){
   // Playing
@@ -80,36 +81,46 @@ function load_parameters(config){
   };
 }
 
+function set_overlap_playing(state){
+  overlap_playing = state;
+}
+
 function key_pressed(event){
-  var alt = event.shiftKey;
+  var shift = event.shiftKey;
   var key = event.which || event.keyCode;
-  console.log(key);
+
   // Space pressed => All players stop
   if(key == 32){
     players_state.forEach(function (playing, index){stop(index);})
     return;
   }
 
+  // Numpad => Change page
   if(key >= 96 && key <= 105){
     key = key - 96;
     document.getElementById("page-a-" + key).click();
     return;
   }
     
+  // A -> Z => play sample
+  // Shift is a modifier
   if(key >= 65 && key <= 90){
-    id = shortkey[key];
-    if(id){
-      if(alt){
-        pause(id)
+    player_id = shortkey[key];
+    if(player_id){
+      if(shift){
+        pause(player_id)
       }
       else{
-        players_state.forEach(function (playing, index){stop(index);})
-        play(id);
+        if(!overlap_playing){
+          players_state.forEach(function (playing, index){stop(index);})
+        }
+        play(player_id);
       }
     }
     return;
   }
 
+  // Random sample ','
   if(key == 188){
     random_key = 65 + Math.floor(Math.random() * Math.floor(25));
     players_state.forEach(function (playing, index){stop(index);})
