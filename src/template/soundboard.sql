@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : mar. 08 mars 2022 à 11:00
+-- Généré le : mar. 08 mars 2022 à 15:56
 -- Version du serveur : 10.3.29-MariaDB-0+deb10u1
 -- Version de PHP : 7.3.19-1~deb10u1
 
@@ -27,13 +27,14 @@ SET time_zone = "+00:00";
 -- Structure de la table `active`
 --
 
-CREATE TABLE `active` (
-  `reference` smallint(6) NOT NULL,
+CREATE TABLE IF NOT EXISTS `active` (
+  `reference` smallint(6) NOT NULL AUTO_INCREMENT,
   `volume` float NOT NULL DEFAULT 1,
   `speed` float NOT NULL DEFAULT 1,
   `audio` int(11) DEFAULT NULL,
   `page` int(11) DEFAULT NULL,
-  `shortkey` int(11) DEFAULT NULL
+  `shortkey` int(11) DEFAULT NULL,
+  PRIMARY KEY (`reference`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -42,43 +43,26 @@ CREATE TABLE `active` (
 -- Structure de la table `audio`
 --
 
-CREATE TABLE `audio` (
-  `reference` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `audio` (
+  `reference` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
-  `file` text NOT NULL
+  `file` text NOT NULL,
+  PRIMARY KEY (`reference`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Index pour les tables déchargées
---
+-- --------------------------------------------------------
 
 --
--- Index pour la table `active`
---
-ALTER TABLE `active`
-  ADD PRIMARY KEY (`reference`);
-
---
--- Index pour la table `audio`
---
-ALTER TABLE `audio`
-  ADD PRIMARY KEY (`reference`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
+-- Structure de la table `sequencer`
 --
 
---
--- AUTO_INCREMENT pour la table `active`
---
-ALTER TABLE `active`
-  MODIFY `reference` smallint(6) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `audio`
---
-ALTER TABLE `audio`
-  MODIFY `reference` int(11) NOT NULL AUTO_INCREMENT;
+CREATE TABLE IF NOT EXISTS `sequencer` (
+  `reference` int(11) NOT NULL AUTO_INCREMENT,
+  `header` tinyint(1) NOT NULL,
+  `audio` int(11) DEFAULT NULL,
+  `next` int(11) DEFAULT NULL,
+  PRIMARY KEY (`reference`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
