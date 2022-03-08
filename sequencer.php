@@ -3,7 +3,7 @@ require_once('src/php/db.php');
 $db = db_connect();
 
 
-function build_sequence($db, $next, $order, &$data_player){
+function build_sequence($db, $next, &$sequence){
     // Exit condition
     if(empty($next)) return "";
 
@@ -33,11 +33,10 @@ function build_sequence($db, $next, $order, &$data_player){
     ";
 
     // Player
-    array_push($data_player, ['reference' => $ref]);
-    $order++;
+    array_push($sequence, ['reference' => $ref]);
     
     // Next element
-    $HTML .= build_sequence($db, $data['next'], $order, $data_player);
+    $HTML .= build_sequence($db, $data['next'], $sequence);
 
     // Return
     return $HTML;
@@ -81,7 +80,7 @@ while($row = mysqli_fetch_assoc($data_header)) {
     array_push($sequence, ['reference' => $ref]);
 
     // Every element of that chain
-    $HTML_players .= build_sequence($db, $row['next'], 1, $sequence);
+    $HTML_players .= build_sequence($db, $row['next'], $sequence);
     $HTML_players .= "</div><br/>";
 
     // Add to general array
