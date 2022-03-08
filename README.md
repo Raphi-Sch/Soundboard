@@ -1,4 +1,4 @@
-# Soundboard
+# Feature
 - Built-in sample library storage
 - Sample player
 - Sequencer
