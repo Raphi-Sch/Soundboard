@@ -82,7 +82,7 @@ while($row = mysqli_fetch_assoc($data_header)) {
     $HTML_players .= "</div><br/>";
 
     // Add to general array
-    $data_all_sequences = $data_all_sequences + [$ref => ['shortkey' => 'test', 'sequence' => $sequence]];
+    $data_all_sequences = $data_all_sequences + [$ref => ['shortkey' => $row['shortkey'], 'sequence' => $sequence]];
 }
 
 $JSON_data_sequence = json_encode($data_all_sequences, JSON_FORCE_OBJECT);
@@ -113,6 +113,11 @@ $JSON_data_sequence = json_encode($data_all_sequences, JSON_FORCE_OBJECT);
     <script src='src/js/sequencer.js'></script>
     <script>
         var data_sequence = JSON.parse('<?php echo $JSON_data_sequence; ?>');
+        var shortkey = [];
+
+        for (const [id, data] of Object.entries(data_sequence)) {
+            shortkey[data.shortkey] = id;
+        };
 
         $(document).ready(function() {
             document.getElementById("sequencer").className="active";
